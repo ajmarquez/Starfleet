@@ -1,6 +1,8 @@
 package com.ninjarobot.abelardo.starshipfleet;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +12,24 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
 
     private String[] mDataset;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
 
         public TextView mTextView;
+
         public ViewHolder(View v) {
             super(v);
+            v.setOnClickListener(this);
             mTextView = (TextView) v.findViewById(R.id.starship_name);
         }
+
+        @Override
+        public void onClick(View view) {
+            Log.d("TEST", "You just touched my buttons");
+            Intent i = new Intent(this , Detail.class);
+
+        }
+
 
     }
 
@@ -30,7 +43,7 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //View gets created
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.starship_layout, parent, false);
+                .inflate(R.layout.item_starship, parent, false);
 
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -42,7 +55,8 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
     }
 
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return mDataset.length;
     }
+
 }
