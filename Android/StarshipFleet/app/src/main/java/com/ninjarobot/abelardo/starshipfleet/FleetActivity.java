@@ -1,12 +1,17 @@
 package com.ninjarobot.abelardo.starshipfleet;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
+
+/**
+ * create a starship entity,
+ * start writing test cases for entity, viewmodels
+ *
+ */
 
 public class FleetActivity extends AppCompatActivity {
 
@@ -21,7 +26,7 @@ public class FleetActivity extends AppCompatActivity {
 
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
-        if (fragment == null){
+        if (fragment == null) {
             fragment = new FleetFragment();
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)

@@ -35,9 +35,10 @@ public class FleetFragment extends Fragment {
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private static final String EXTRA_INFO = "com.ninjarobot.abelardo.starshipfleet";
 
 
-    private String[] myDataset = new String[] {"X-Wing", "Millenium Falcon", "Star Detroyer", "DeathStar"};
+    private String[] myDataset = new String[] {"X-Wing", "Millenium Falcon", "Star Destroyer", "DeathStar", "Radiant VII", "TIE Fighter"};
 
 
     private OnFragmentInteractionListener mListener;

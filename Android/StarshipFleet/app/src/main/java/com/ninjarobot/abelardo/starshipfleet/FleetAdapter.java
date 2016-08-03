@@ -1,5 +1,6 @@
 package com.ninjarobot.abelardo.starshipfleet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,17 +17,21 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
 
 
         public TextView mTextView;
+        private final Context context;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
             mTextView = (TextView) v.findViewById(R.id.starship_name);
+            context = v.getContext();
         }
 
         @Override
         public void onClick(View view) {
             Log.d("TEST", "You just touched my buttons");
-            Intent i = new Intent(this , Detail.class);
+
+            Intent intent = new Intent(context, Detail.class);
+            context.startActivity(intent);
 
         }
 
@@ -58,5 +63,4 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
     public int getItemCount() {
         return mDataset.length;
     }
-
 }
