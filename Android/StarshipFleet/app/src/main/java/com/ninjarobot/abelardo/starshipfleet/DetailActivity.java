@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Detail extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
 
 
@@ -14,11 +14,11 @@ public class Detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        public static Intent newIntent(Context packageContext, String starshipName) {
+//        public static Intent newIntent(Context packageContext, String starshipName) {
+//
+//    }
 
-    }
-
-        Intent i = getIntent();
+        Intent intent = getIntent();
 
 
     }

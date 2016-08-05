@@ -30,7 +30,7 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
         public void onClick(View view) {
             Log.d("TEST", "You just touched my buttons");
 
-            Intent intent = new Intent(context, Detail.class);
+            Intent intent = new Intent(context, DetailActivity.class);
             context.startActivity(intent);
 
         }

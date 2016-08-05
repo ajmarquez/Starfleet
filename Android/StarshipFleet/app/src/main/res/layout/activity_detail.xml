@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.ninjarobot.abelardo.starshipfleet.Detail">
+    tools:context=".DetailActivity">
 
     <TextView
         android:layout_width="wrap_content"

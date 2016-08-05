@@ -1,16 +1,16 @@
-package com.ninjarobot.abelardo.starshipfleet;
+package com.ninjarobot.abelardo.starshipfleet.entities;
 
 /**
  * Created by ajmarquez on 04/08/16.
  */
-public class Starship {
+public class StarShip {
 
     private String mName;
     private String mModel;
     private String mManufacturer;
     private int mCapacity;
 
-    public Starship(String name, String model, String manufacturer, int capacity){
+    public StarShip(String name, String model, String manufacturer, int capacity){
         mName = name;
         mModel = model;
         mManufacturer = manufacturer;
