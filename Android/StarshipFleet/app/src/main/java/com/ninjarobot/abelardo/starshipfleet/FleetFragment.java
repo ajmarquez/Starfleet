@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
+
 public class FleetFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,8 +22,19 @@ public class FleetFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private static final String EXTRA_INFO = "com.ninjarobot.abelardo.starshipfleet";
-    private String[] myDataset = new String[] {"X-Wing", "Millenium Falcon", "Star Destroyer", "DeathStar", "Radiant VII", "TIE Fighter"};
     private OnFragmentInteractionListener mListener;
+
+    //Dataset declaration StarShip(String name, String model, String manufacturer, int capacity)
+    private StarShip[] myDataset = new StarShip[]{
+            new StarShip("X-Wing", "Premium", "Rebels Inc", "4"),
+            new StarShip("Millenium Falcon", "Original", "Han Solo", "100"),
+            new StarShip("Star Destroyer", "Premium", "The Republic", "2000"),
+            new StarShip("DeathStar", "Unique", "The Republic", "10000"),
+            new StarShip("Radiant VII", "Regular", "Droid Bros", "300"),
+            new StarShip("TIE Fighter", "Regular", "The Rebels", "4")
+    };
+    //private String[] myDataset = new String[] {"X-Wing", "Millenium Falcon", "Star Destroyer", "DeathStar", "Radiant VII", "TIE Fighter"};
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +64,10 @@ public class FleetFragment extends Fragment {
     public interface OnFragmentInteractionListener {
 
         void onFragmentInteraction(Uri uri);
+    }
+
+    public StarShip[] getDataset(){
+        return myDataset;
     }
 }
 

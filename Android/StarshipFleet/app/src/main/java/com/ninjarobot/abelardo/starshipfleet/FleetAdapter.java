@@ -9,20 +9,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
+
+import org.w3c.dom.Text;
+
 public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> {
 
-    private String[] mDataset;
+    private StarShip[] mDataset;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        public TextView mTextView;
+        public TextView mNameView;
+        public TextView mModelView;
+        public TextView mManufaturerView;
+        public TextView mCapacityView;
+
         private final Context context;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            mTextView = (TextView) v.findViewById(R.id.starship_name);
+            mNameView = (TextView) v.findViewById(R.id.starship_name);
+            mModelView = (TextView) v.findViewById(R.id.starship_model);
+            mManufaturerView = (TextView) v.findViewById(R.id.starship_manufacturer);
+            mCapacityView = (TextView) v.findViewById(R.id.starship_capacity);
             context = v.getContext();
         }
 
@@ -39,7 +50,7 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
     }
 
 
-    public FleetAdapter(String[] mydataset) {
+    public FleetAdapter(StarShip[] mydataset) {
         mDataset = mydataset;
     }
 
@@ -56,7 +67,10 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTextView.setText(mDataset[position]);
+        holder.mNameView.setText(mDataset[position].getName());
+        holder.mModelView.setText(mDataset[position].getModel());
+        holder.mManufaturerView.setText(mDataset[position].getManufacturer());
+        holder.mCapacityView.setText(mDataset[position].getCapacity());
     }
 
     @Override

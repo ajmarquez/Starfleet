@@ -8,9 +8,9 @@ public class StarShip {
     private String mName;
     private String mModel;
     private String mManufacturer;
-    private int mCapacity;
+    private String mCapacity;
 
-    public StarShip(String name, String model, String manufacturer, int capacity){
+    public StarShip(String name, String model, String manufacturer, String capacity){
         mName = name;
         mModel = model;
         mManufacturer = manufacturer;
@@ -29,7 +29,7 @@ public class StarShip {
         return mManufacturer;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return mCapacity;
     }
 
@@ -45,7 +45,7 @@ public class StarShip {
         mManufacturer = manufacturer;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(String capacity) {
         mCapacity = capacity;
     }
 }

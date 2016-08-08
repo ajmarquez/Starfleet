@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StarshipFleet</string>
+    <string name="app_name">Starship Catalog</string>
     <string name="button_name">Do not press</string>
     <string name="detail_message">Following the rules, aren\'t we?</string>
 

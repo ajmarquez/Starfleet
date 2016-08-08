@@ -9,6 +9,8 @@ import static org.junit.Assert.*;
  */
 public class FleetAdapterTest {
 
+
+
     @Test
     public void testOnCreateViewHolder() throws Exception {
 

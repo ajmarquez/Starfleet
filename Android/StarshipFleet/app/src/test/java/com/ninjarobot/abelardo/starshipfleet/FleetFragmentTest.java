@@ -3,6 +3,8 @@ package com.ninjarobot.abelardo.starshipfleet;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,24 +24,45 @@ import static org.junit.Assert.*;
 public class FleetFragmentTest {
 
     private FleetFragment mFleetFragment;
+    private StarShip[] mDataSet;
 
     @Before
     public void init(){
 
-        FragmentManager fm = new FragmentManager() {
+        mFleetFragment = new FleetFragment();
+        mDataSet = mFleetFragment.getDataset();
+
+    }
+
+    @Test
+    public void testStarShipObject() throws Exception {
+
+        assertNotNull(mDataSet);
+
+        for (int i = 0; i < mDataSet.length; i++){
+
+            assertNotNull("NULL object in the array", mDataSet[i]);
+            assertEquals("Not the right class", StarShip.class, mDataSet[i].getClass());
+
+            //Check individual properties
+            assertNotNull("Field is NULL", mDataSet[i].getName());
+            assertNotNull("Field is NULL", mDataSet[i].getModel());
+            assertNotNull("Field is NULL", mDataSet[i].getManufacturer());
+            assertNotNull("Field is NULL", mDataSet[i].getCapacity());
+
+            //Check that Strings are longer than 0
+
+            assertTrue("Field has blank string", mDataSet[i].getName() != "");
+            assertTrue("Field is blank string", mDataSet[i].getModel() != "");
+            assertTrue("Field is blank string", mDataSet[i].getManufacturer() != "");
+
         }
-    }
-
-    @Test
-    public void testOnCreate() throws Exception {
-
-        mFleetFragment = Robolectric.buildFragment(FleetFragment.class).create().get();
 
 
     }
 
-    @Test
-    public void testOnCreateView() throws Exception {
-
-    }
+//    @Test
+//    public void testOnCreateView() throws Exception {
+//
+//    }
 }
