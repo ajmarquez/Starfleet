@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ninjarobot.abelardo.starshipfleet.Utilities.HttpUtils;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 
 import org.w3c.dom.Text;
@@ -40,6 +41,9 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
         @Override
         public void onClick(View view) {
             Log.d("TEST", "You just touched my buttons");
+
+
+            HttpUtils.CheckNetworkStatus(context);
 
             Intent intent = new Intent(context, DetailActivity.class);
             context.startActivity(intent);
