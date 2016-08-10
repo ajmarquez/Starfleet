@@ -5,13 +5,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import org.json.JSONArray;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 
+import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -39,14 +44,13 @@ public class HttpUtils {
 
     }
 
-    public static String downloadUrl(String myurl) throws IOException {
+    public void downloadUrl(String myUrl) throws IOException {
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
         // web page content.
-        int len = 500;
 
         try {
-            URL url = new URL(myurl);
+            URL url = new URL(myUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
@@ -56,15 +60,30 @@ public class HttpUtils {
             conn.connect();
             int response = conn.getResponseCode();
             Log.d("DEBUG", "The response is: " + response);
+
+            Log.d("DEBUG", "Content type: " + conn.getContentType());
             is = conn.getInputStream();
 
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
+            // Read content
+            BufferedReader reader =new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            String webPage = "";
+            String data;
 
-            // Makes sure that the InputStream is closed after the app is
-            // finished using it.
-        } finally {
+            while ((data = reader.readLine()) != null){
+                webPage += data + "\n";
+            }
+
+            Log.d("INFO", webPage);
+            ObjectMapper mapper = new ObjectMapper();
+            StarShip myObjects = mapper.readValue(webPage, new TypeReference<StarShip>(){});
+            Log.d("works ..", myObjects.getName());
+
+            // Convert the InputStream into a string
+
+//            Log.d( "INFO", "Solution:" + contentAsString);
+
+
+        }finally{
             if (is != null) {
                 try {
                     is.close();
@@ -73,13 +92,10 @@ public class HttpUtils {
                 }
             }
         }
+
+
+
+
     }
 
-    private String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
-    }
 }

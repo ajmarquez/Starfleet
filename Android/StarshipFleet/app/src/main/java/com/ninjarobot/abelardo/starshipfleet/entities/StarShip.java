@@ -1,8 +1,11 @@
 package com.ninjarobot.abelardo.starshipfleet.entities;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 /**
  * Created by ajmarquez on 04/08/16.
  */
+
 public class StarShip {
 
     private String mName;
@@ -10,6 +13,7 @@ public class StarShip {
     private String mManufacturer;
     private String mCapacity;
 
+    public StarShip(){}
     public StarShip(String name, String model, String manufacturer, String capacity){
         mName = name;
         mModel = model;
@@ -17,18 +21,23 @@ public class StarShip {
         mCapacity = capacity;
     }
 
+
+    @JsonGetter("name")
     public String getName() {
         return mName;
     }
 
+    @JsonGetter("model")
     public String getModel() {
         return mModel;
     }
 
+    @JsonGetter("manufacturer")
     public String getManufacturer() {
         return mManufacturer;
     }
 
+    @JsonGetter("passenger")
     public String getCapacity() {
         return mCapacity;
     }

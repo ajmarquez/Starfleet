@@ -14,6 +14,10 @@ import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> {
 
     private StarShip[] mDataset;
@@ -27,6 +31,8 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
         public TextView mCapacityView;
 
         private final Context context;
+        private ExecutorService executor = Executors.newSingleThreadExecutor();
+
 
         public ViewHolder(View v) {
             super(v);
@@ -42,11 +48,22 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
         public void onClick(View view) {
             Log.d("TEST", "You just touched my buttons");
 
+            HttpUtils mUtils = new HttpUtils();
 
-            HttpUtils.CheckNetworkStatus(context);
 
-            Intent intent = new Intent(context, DetailActivity.class);
-            context.startActivity(intent);
+            //HttpUtils.CheckNetworkStatus(context);
+
+
+
+            executor.submit(() -> {
+                try {
+                    mUtils.downloadUrl("http://swapi.co/api/starships/9/?format=json");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            //Content intent = new Intent(context, DetailActivity.class);
+            //context.startActivity(intent);
 
         }
 
@@ -54,8 +71,8 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
     }
 
 
-    public FleetAdapter(StarShip[] mydataset) {
-        mDataset = mydataset;
+    public FleetAdapter(StarShip[] aDataSet) {
+        mDataset = aDataSet;
     }
 
 
