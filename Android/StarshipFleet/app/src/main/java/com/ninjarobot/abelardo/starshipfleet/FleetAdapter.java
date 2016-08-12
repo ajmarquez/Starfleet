@@ -15,12 +15,13 @@ import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> {
 
-    private StarShip[] mDataset;
+    private List<StarShip> mDataset;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -55,13 +56,13 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
 
 
 
-            executor.submit(() -> {
-                try {
-                    mUtils.downloadUrl("http://swapi.co/api/starships/9/?format=json");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+//            executor.submit(() -> {
+//                try {
+//                    mUtils.downloadUrl("http://swapi.co/api/starships/");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            });
             //Content intent = new Intent(context, DetailActivity.class);
             //context.startActivity(intent);
 
@@ -71,7 +72,7 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
     }
 
 
-    public FleetAdapter(StarShip[] aDataSet) {
+    public FleetAdapter(List<StarShip> aDataSet) {
         mDataset = aDataSet;
     }
 
@@ -88,14 +89,18 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mNameView.setText(mDataset[position].getName());
-        holder.mModelView.setText(mDataset[position].getModel());
-        holder.mManufaturerView.setText(mDataset[position].getManufacturer());
-        holder.mCapacityView.setText(mDataset[position].getCapacity());
+        holder.mNameView.setText(mDataset.get(position).getName());
+        holder.mModelView.setText(mDataset.get(position).getModel());
+        holder.mManufaturerView.setText(mDataset.get(position).getManufacturer());
+        holder.mCapacityView.setText(mDataset.get(position).getCapacity());
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
+    }
+
+    public void setDataset(List<StarShip> dataset) {
+        mDataset = dataset;
     }
 }

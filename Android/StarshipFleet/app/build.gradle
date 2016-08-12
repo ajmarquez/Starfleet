@@ -34,14 +34,25 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.1.2'
+
+    // Android support libraries
     compile 'com.android.support:appcompat-v7:24.1.1'
     compile 'com.android.support:support-v4:24.1.1'
     compile 'com.android.support:cardview-v7:24.1.1'
     compile 'com.android.support:recyclerview-v7:24.1.1'
     compile 'com.orhanobut:logger:1.15'
+
+    // Roboelectric for Testing
+    testCompile 'org.robolectric:robolectric:3.1.2'
+
+    // Apache library for inputStream -> String
     compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
 
+    //Retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
+
+    //Jackson + Annotations
     compile 'com.fasterxml.jackson.core:jackson-core:2.4.2'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'

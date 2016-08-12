@@ -6,8 +6,12 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
+import com.ninjarobot.abelardo.starshipfleet.entities.StartShipWrapper;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
@@ -19,6 +23,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 /**
  * Created by ajmarquez on 09/08/16.
@@ -26,6 +31,8 @@ import java.net.URL;
 public class HttpUtils {
 
     private Context utilsContext;
+    private List<StarShip> shipsData;
+    private boolean beacon = false;
 
     public static void CheckNetworkStatus(Context context) {
 
@@ -44,7 +51,7 @@ public class HttpUtils {
 
     }
 
-    public void downloadUrl(String myUrl) throws IOException {
+    public void downloadData(String myUrl) throws IOException {
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
         // web page content.
@@ -72,18 +79,21 @@ public class HttpUtils {
             while ((data = reader.readLine()) != null){
                 webPage += data + "\n";
             }
-
             Log.d("INFO", webPage);
+
+            // Serialize JSON
             ObjectMapper mapper = new ObjectMapper();
-            StarShip myObjects = mapper.readValue(webPage, new TypeReference<StarShip>(){});
-            Log.d("works ..", myObjects.getName());
-
-            // Convert the InputStream into a string
-
-//            Log.d( "INFO", "Solution:" + contentAsString);
+            StartShipWrapper myObjects = mapper.readValue(webPage, new TypeReference<StartShipWrapper>(){});
+            shipsData = myObjects.getResults();
+            Log.d("DEBUG", "Number of elements:" + myObjects.getResults().size());
 
 
-        }finally{
+
+        }catch (IOException ex) {
+            // LOG or output exception
+            System.out.println(ex);
+        } finally{
+            beacon = true;
             if (is != null) {
                 try {
                     is.close();
@@ -94,8 +104,13 @@ public class HttpUtils {
         }
 
 
-
-
     }
 
+    public List<StarShip> getShipsData() {
+        return shipsData;
+    }
+
+    public boolean isReady () {
+        return beacon;
+    }
 }

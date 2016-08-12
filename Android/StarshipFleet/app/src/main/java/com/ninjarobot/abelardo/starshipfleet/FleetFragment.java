@@ -5,13 +5,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ninjarobot.abelardo.starshipfleet.Utilities.HttpUtils;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FleetFragment extends Fragment {
 
@@ -25,16 +34,15 @@ public class FleetFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //Dataset declaration StarShip(String name, String model, String manufacturer, int capacity)
-    private StarShip[] myDataset = new StarShip[]{
-            new StarShip("X-Wing", "Premium", "Rebels Inc", "4"),
-            new StarShip("Millenium Falcon", "Original", "Han Solo", "100"),
-            new StarShip("Star Destroyer", "Premium", "The Republic", "2000"),
-            new StarShip("DeathStar", "Unique", "The Republic", "10000"),
-            new StarShip("Radiant VII", "Regular", "Droid Bros", "300"),
-            new StarShip("TIE Fighter", "Regular", "The Rebels", "4")
-    };
+    private List<StarShip> myDataset = new ArrayList<StarShip>();
     //private String[] myDataset = new String[] {"X-Wing", "Millenium Falcon", "Star Destroyer", "DeathStar", "Radiant VII", "TIE Fighter"};
 
+    @Override
+    public void onCreate (Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //Load data
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,13 +52,13 @@ public class FleetFragment extends Fragment {
         // Recycler view
         mRecycler = (RecyclerView) v.findViewById(R.id.recycler);
 
+
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(mLayoutManager);
 
         //RecyclerView Adapter
         mAdapter = new FleetAdapter(myDataset);
         mRecycler.setAdapter(mAdapter);
-        mRecycler.setHasFixedSize(true);
 
         return v;
     }
@@ -66,8 +74,12 @@ public class FleetFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public StarShip[] getDataset(){
+    public List<StarShip> getDataset(){
         return myDataset;
+    }
+
+    public void setMyDataset(List<StarShip> myDataset) {
+        this.myDataset = myDataset;
     }
 }
 

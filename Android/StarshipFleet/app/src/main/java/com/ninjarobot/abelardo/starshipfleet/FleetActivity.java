@@ -6,8 +6,20 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.ninjarobot.abelardo.starshipfleet.Utilities.HttpUtils;
+import com.ninjarobot.abelardo.starshipfleet.entities.StartShipWrapper;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 
 /**
@@ -18,7 +30,13 @@ import android.widget.Button;
 
 public class FleetActivity extends AppCompatActivity {
 
+    public static final String TAG = FleetFragment.class.getName();
+    public static final String BASE_URL = "https://swapi.co/";
+
     private Button mDetailButton;
+    private ExecutorService executor = Executors.newSingleThreadExecutor();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +46,19 @@ public class FleetActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
 
         FleetFragment fragment = (FleetFragment) fm.findFragmentById(R.id.fragment_container);
+
+        /* HERE BEGINS DATA REQUEST BLOCK:
+         * Data is requested and Fragment wont be initialized until Json parsing is ready
+         */
+
+
+
+
+
+
+
+
+     /* END OF REQUEST BLOCK */
 
         if (fragment == null) {
             fragment = new FleetFragment();
