@@ -1,25 +1,15 @@
 package com.ninjarobot.abelardo.starshipfleet;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-
-import com.ninjarobot.abelardo.starshipfleet.Utilities.HttpUtils;
-import com.ninjarobot.abelardo.starshipfleet.entities.StartShipWrapper;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
+import com.ninjarobot.abelardo.starshipfleet.Interfaces.ApiCallback;
+import com.ninjarobot.abelardo.starshipfleet.Utilities.FleetConstants;
+import com.ninjarobot.abelardo.starshipfleet.Utilities.StarshipFactory;
+import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
+import java.util.List;
 
 
 /**
@@ -28,45 +18,40 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
  *
  */
 
-public class FleetActivity extends AppCompatActivity {
+public class FleetActivity extends AppCompatActivity implements ApiCallback {
 
-    public static final String TAG = FleetFragment.class.getName();
-    public static final String BASE_URL = "https://swapi.co/";
-
-    private Button mDetailButton;
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
-
-
+    FleetFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        Log.d(FleetConstants.STATUS_DEBUG, "OnCreate");
+        
         setContentView(R.layout.activity_fleet);
-
         FragmentManager fm = getSupportFragmentManager();
-
-        FleetFragment fragment = (FleetFragment) fm.findFragmentById(R.id.fragment_container);
-
-        /* HERE BEGINS DATA REQUEST BLOCK:
-         * Data is requested and Fragment wont be initialized until Json parsing is ready
-         */
-
-
-
-
-
-
-
-
-     /* END OF REQUEST BLOCK */
+        StarshipFactory factory = new StarshipFactory();
 
         if (fragment == null) {
+
             fragment = new FleetFragment();
+            factory.getStarships(this);
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment, FleetFragment.TAG)
                     .commit();
+
+        }else{
+
+            //This gets called when the screen is flipped
+            fragment = (FleetFragment) fm.findFragmentById(R.id.fragment_container);
+            factory.getStarships(this);
+
         }
     }
 
-
+    @Override
+    public void ShipCallback(List<StarShip> ships) {
+        fragment.setMyDataset(ships);
+    }
 }

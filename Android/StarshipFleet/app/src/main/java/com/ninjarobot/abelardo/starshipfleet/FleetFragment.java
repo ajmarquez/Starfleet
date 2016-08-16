@@ -12,15 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.ninjarobot.abelardo.starshipfleet.Utilities.HttpUtils;
+import com.ninjarobot.abelardo.starshipfleet.Utilities.StarshipFactory;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 public class FleetFragment extends Fragment {
 
@@ -41,6 +37,7 @@ public class FleetFragment extends Fragment {
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Load data
+
 
     }
 
@@ -78,8 +75,13 @@ public class FleetFragment extends Fragment {
         return myDataset;
     }
 
-    public void setMyDataset(List<StarShip> myDataset) {
-        this.myDataset = myDataset;
+    public void setMyDataset(List<StarShip> dataset) {
+        myDataset.clear();
+        myDataset.addAll(dataset);
+        int count = myDataset.size();
+        mRecycler.getAdapter().notifyDataSetChanged();
+
+
     }
 }
 
