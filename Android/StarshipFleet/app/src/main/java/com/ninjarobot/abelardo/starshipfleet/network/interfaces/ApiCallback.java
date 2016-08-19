@@ -1,6 +1,5 @@
-package com.ninjarobot.abelardo.starshipfleet.Interfaces;
+package com.ninjarobot.abelardo.starshipfleet.network.interfaces;
 
-import com.ninjarobot.abelardo.starshipfleet.FleetFragment;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 @FunctionalInterface
 public interface ApiCallback {
 
-    void ShipCallback (List<StarShip> ships);
+    void shipCallback(List<StarShip> ships);
 
 
 }

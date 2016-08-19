@@ -1,4 +1,4 @@
-package com.ninjarobot.abelardo.starshipfleet.Utilities;
+package com.ninjarobot.abelardo.starshipfleet.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -6,21 +6,14 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationConfig;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 import com.ninjarobot.abelardo.starshipfleet.entities.StartShipWrapper;
-
-import org.apache.commons.io.IOUtils;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;

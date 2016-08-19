@@ -1,14 +1,11 @@
 package com.ninjarobot.abelardo.starshipfleet;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-
+import com.ninjarobot.abelardo.starshipfleet.ui.fragments.FleetFragment;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 

@@ -1,7 +1,5 @@
 package com.ninjarobot.abelardo.starshipfleet.entities;
 
-import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;

@@ -1,4 +1,4 @@
-package com.ninjarobot.abelardo.starshipfleet.Interfaces;
+package com.ninjarobot.abelardo.starshipfleet.network.interfaces;
 
 import com.ninjarobot.abelardo.starshipfleet.entities.StartShipWrapper;
 

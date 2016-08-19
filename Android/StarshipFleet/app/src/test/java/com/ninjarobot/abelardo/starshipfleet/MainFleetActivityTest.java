@@ -1,5 +1,7 @@
 package com.ninjarobot.abelardo.starshipfleet;
 
+import com.ninjarobot.abelardo.starshipfleet.ui.fragments.FleetFragment;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -15,14 +17,14 @@ import static junit.framework.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml", packageName = "com.ninjarobot.abelardo.starshipfleet")
-public class FleetActivityTest {
+public class MainFleetActivityTest {
 
-    private FleetActivity mActivity;
+    private MainFleetActivity mActivity;
 
     @Test
     public void testOnCreate() throws Exception {
 
-        mActivity = Robolectric.buildActivity(FleetActivity.class).create().get();
+        mActivity = Robolectric.buildActivity(MainFleetActivity.class).create().get();
         FleetFragment fleetFragment = (FleetFragment) mActivity.
                 getSupportFragmentManager().findFragmentByTag(FleetFragment.TAG);
         assertNotNull(fleetFragment);
