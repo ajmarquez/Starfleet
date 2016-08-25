@@ -1,4 +1,4 @@
-package com.ninjarobot.abelardo.starshipfleet.Utilities;
+package com.ninjarobot.abelardo.starshipfleet.utils;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

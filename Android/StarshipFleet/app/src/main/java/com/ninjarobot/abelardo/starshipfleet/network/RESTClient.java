@@ -1,9 +1,12 @@
 package com.ninjarobot.abelardo.starshipfleet.network;
 
-import com.ninjarobot.abelardo.starshipfleet.network.interfaces.ApiCallback;
+import android.util.Log;
+
 import com.ninjarobot.abelardo.starshipfleet.network.interfaces.FleetAPI;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 import com.ninjarobot.abelardo.starshipfleet.entities.StartShipWrapper;
+import com.ninjarobot.abelardo.starshipfleet.utils.FleetConstants;
+import com.ninjarobot.abelardo.starshipfleet.utils.function.Consumer;
 
 import java.util.List;
 
@@ -20,8 +23,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 public class RESTClient {
 
     public static final String BASE_URL = "https://swapi.co/";
-    List<StarShip> starshipList;
-    public boolean isFleetReady = false;
+    List<StarShip> starships;
 
 
     public Retrofit createFactory() {
@@ -33,7 +35,7 @@ public class RESTClient {
     }
 
 
-    public void getStarships(ApiCallback callbackObject) {
+    public void getResourse(Consumer consumer) {
 
         FleetAPI service = createFactory().create(FleetAPI.class);
         Call<StartShipWrapper> call = service.getEntity();
@@ -43,17 +45,39 @@ public class RESTClient {
             public void onResponse(Call<StartShipWrapper> call, Response<StartShipWrapper> response) {
                 if (response.isSuccessful()) {
 
-                    starshipList = response.body().getResults();
-//                    shipCallback(fragment,starshipList );
-                    callbackObject.shipCallback(starshipList);
+                    Log.d(FleetConstants.STATUS_DEBUG, "Success");
+                    starships = response.body().getResults();
+                    consumer.consume(starships);
                 }
             }
 
             @Override
             public void onFailure(Call<StartShipWrapper> call, Throwable t) {
 
+                Log.d(FleetConstants.STATUS_DEBUG, "FAILURE");
+
             }
         });
 
     }
+//
+//    public void getResources(Consumer<T> consumer){
+//
+//        consumer.consume();
+//    }
+//
+//    public void postResources(Consumer<T> consumer){
+//
+//        consumer.consume();
+//    }
+//
+//    public void deleteResources(Consumer<T> consumer){
+//
+//        consumer.consume();
+//    }
+//
+//    public void patchResources(Consumer<T> consumer){
+//
+//        consumer.consume();
+//    }
 }

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.ninjarobot.abelardo.starshipfleet.ui.fragments.FleetFragment;
-import com.ninjarobot.abelardo.starshipfleet.Utilities.FleetConstants;
+import com.ninjarobot.abelardo.starshipfleet.utils.FleetConstants;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 
 import java.util.List;

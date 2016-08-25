@@ -2,22 +2,21 @@ package com.ninjarobot.abelardo.starshipfleet.ui.views;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ninjarobot.abelardo.starshipfleet.R;
+import com.ninjarobot.abelardo.starshipfleet.controllers.FleetController;
 import com.ninjarobot.abelardo.starshipfleet.entities.StarShip;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> {
+public class FleetAdapter<T> extends RecyclerView.Adapter<FleetAdapter.ViewHolder> {
 
     private List<StarShip> dataset;
+    private FleetController mFleetController;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -26,9 +25,11 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
         public TextView manufacturerTV;
         public TextView capacityTV;
         private final Context context;
+        private FleetController controller;
+        private List<StarShip> vhdataset;
 
 
-        public ViewHolder(View v) {
+        public ViewHolder(View v, FleetController controller, List<StarShip> data) {
             super(v);
             v.setOnClickListener(this);
             nameTV = (TextView) v.findViewById(R.id.starship_name);
@@ -36,17 +37,20 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
             manufacturerTV = (TextView) v.findViewById(R.id.starship_manufacturer);
             capacityTV = (TextView) v.findViewById(R.id.starship_capacity);
             context = v.getContext();
+            this.controller = controller;
+            vhdataset =  data;
         }
 
         @Override
         public void onClick(View view) {
-            Log.d("TEST", "You just touched my buttons");
+//            this.controller.onClickedCell(vhdataset, getAdapterPosition(), context);
+            //DetailActivity detail = n
         }
     }
 
 
-    public FleetAdapter(List<StarShip> dataset) {
-        this.dataset = dataset;
+    public FleetAdapter(FleetController controller) {
+        this.mFleetController = controller;
     }
 
 
@@ -56,7 +60,7 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.ViewHolder> 
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_starship, parent, false);
 
-        ViewHolder vh = new ViewHolder(v);
+        ViewHolder vh = new ViewHolder(v, mFleetController, dataset);
         return vh;
     }
 

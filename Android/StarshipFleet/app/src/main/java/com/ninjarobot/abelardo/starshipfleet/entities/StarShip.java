@@ -1,10 +1,16 @@
 package com.ninjarobot.abelardo.starshipfleet.entities;
 
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonTypeResolver;
 
 /**
  * Created by ajmarquez on 04/08/16.
@@ -13,59 +19,70 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StarShip implements Parcelable {
 
-    private String mName;
-    private String mModel;
-    private String mManufacturer;
-    private String mCapacity;
+//    @JsonProperty("name")
+    private String name;
+//    @JsonProperty("model")
+    private String model;
+//    @JsonProperty("manufacturer")
+    private String manufacturer;
+//    @JsonProperty("cargo_capacity")
+    private int capacity;
 
-
-    public StarShip(String name, String model, String manufacturer, String capacity){
-        mName = name;
-        mModel = model;
-        mManufacturer = manufacturer;
-        mCapacity = capacity;
+    @JsonCreator
+    public StarShip(@JsonProperty("name") String name, @JsonProperty("model") String model, @JsonProperty("manufacturer") String manufacturer, @JsonProperty("cargo_capacity") String cargo){
+        this.name = name;
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.capacity = Integer.parseInt(cargo);
     }
+
+//    public StarShip(String name, String model, String manufacturer, Integer capacity){
+//        this.name = name;
+//        this.model = model;
+//        this.manufacturer = manufacturer;
+//        this.capacity = capacity;
+//    }
 
 
     public StarShip () {
-
     }
 
 
-    @JsonGetter("name")
+//    @JsonGetter("name")
     public String getName() {
-        return mName;
+        return name;
     }
 
-    @JsonGetter("model")
+//    @JsonGetter("model")
     public String getModel() {
-        return mModel;
+        return model;
     }
 
-    @JsonGetter("manufacturer")
+//    @JsonGetter("manufacturer")
     public String getManufacturer() {
-        return mManufacturer;
+        return manufacturer;
     }
 
-    @JsonGetter("passenger")
-    public String getCapacity() {
-        return mCapacity;
+
+//    @JsonGetter("cargo_capacity")
+    public Integer getCapacity() {
+        return capacity;
     }
 
     public void setName(String name) {
-        mName = name;
+        this.name = name;
     }
 
     public void setModel(String model) {
-        mModel = model;
+        this.model = model;
     }
 
     public void setManufacturer(String manufacturer) {
-        mManufacturer = manufacturer;
+        this.manufacturer = manufacturer;
     }
 
-    public void setCapacity(String capacity) {
-        mCapacity = capacity;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public StarShip(Parcel in) {
@@ -88,7 +105,7 @@ public class StarShip implements Parcelable {
         setName(in.readString());
         setModel(in.readString());
         setManufacturer(in.readString());
-        setCapacity(in.readString());
+        setCapacity(in.readInt());
     }
 
     @Override
@@ -101,7 +118,7 @@ public class StarShip implements Parcelable {
         parcel.writeString(getName());
         parcel.writeString(getModel());
         parcel.writeString(getManufacturer());
-        parcel.writeString(getCapacity());
+        parcel.writeInt(getCapacity());
 
     }
 }
